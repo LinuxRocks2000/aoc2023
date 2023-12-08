@@ -101,15 +101,20 @@ void fstrip(FILE* file) {
 }
 
 void aocMain(int AOC_DAY, long aocSolutionP1(FILE*), long aocSolutionP2(FILE*), int argc, char** argv) {
-	if (argc == 2) {
+	if (argc >= 2) {
 		FILE* file = fopen(argv[1], "r");
 		if (file == NULL) {
 			printf("FATAL: Could not open input file.\n");
 			exit(1);
 		}
-		long solp1 = aocSolutionP1(file);
+		long solp1, solp2;
+		if (argc == 2 || strcmp(argv[2], "p1") == 0){
+			solp1 = aocSolutionP1(file);
+		}
 		rewind(file);
-		long solp2 = aocSolutionP2(file);
+		if (argc == 2 || strcmp(argv[2], "p2") == 0){
+			solp2 = aocSolutionP2(file);
+		}
 		printf("Solved day %d, part 1 is %d and part 2 is %d.\n", AOC_DAY, solp1, solp2);
 	}
 	else {
